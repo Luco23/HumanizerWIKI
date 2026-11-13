@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanizador Académico Anti-IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Encabezado -->
+        <header class="mb-8 border-b border-slate-700 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-emerald-400 flex items-center gap-2">
+                    <i class="fas fa-user-shield"></i> Humanizador Académico Anti-IA
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Basado en reglas de escritura natural y detección de patrones (Wikipedia AI Cleanup).</p>
+            </div>
+            <span class="bg-emerald-950 text-emerald-300 border border-emerald-700 text-xs px-3 py-1 rounded-full font-medium">
+                Protección APA & Anti-Clichés Activa
+            </span>
+        </header>
+
+        <!-- Panel de Configuración (Checkboxes) -->
+        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 mb-6 shadow-lg">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+                <i class="fas fa-sliders-h text-emerald-400"></i> Reglas de Transformación
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Regla 1: Citas -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-citations" checked class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-emerald-300 block">Blindar Citas Bibliográficas</span>
+                        <span class="text-xs text-slate-400">Mantiene intactos formatos como (Alongi, 2020) sin alterar ortografía ni posición.</span>
+                    </div>
+                </label>
+
+                <!-- Regla 2: Longitud -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-length" checked class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-emerald-300 block">Conservar Máximo de Palabras</span>
+                        <span class="text-xs text-slate-400">Prohíbe resumir. Mantiene toda la densidad técnica y extensión original.</span>
+                    </div>
+                </label>
+
+                <!-- Regla 3: Wikipedia Anti-Clichés -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-wiki" checked class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-emerald-300 block">Filtro Anti-Clichés (Wikipedia)</span>
+                        <span class="text-xs text-slate-400">Elimina frases de IA ("en el panorama actual", "es un testimonio de", "a pesar de sus desafíos").</span>
+                    </div>
+                </label>
+
+                <!-- Regla 4: Oraciones directas -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-sentences" checked class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-slate-300 block">Ritmo Humano Variable</span>
+                        <span class="text-xs text-slate-400">Alterna frases cortas y directas evitando subordinadas excesivas tipo Cervantes.</span>
+                    </div>
+                </label>
+
+                <!-- Regla 5: Comas naturales -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-commas" class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-slate-300 block">Puntuación Menos Robótica</span>
+                        <span class="text-xs text-slate-400">Evita pausas hiper-perfectas de manual y conectores repetitivos ("Asimismo", "Cabe destacar").</span>
+                    </div>
+                </label>
+
+                <!-- Regla 6: Imperfección sutil -->
+                <label class="flex items-start gap-3 p-3 bg-slate-900/60 rounded-lg border border-slate-700/80 cursor-pointer hover:border-emerald-500/50 transition">
+                    <input type="checkbox" id="rule-typos" class="mt-1 accent-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-medium text-sm text-slate-300 block">Descuido Sutil de Estudiante</span>
+                        <span class="text-xs text-slate-400">Omite 1 o 2 tildes menores en palabras llanas o esdrújulas poco comunes (nunca en citas).</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Área de Trabajo -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Entrada -->
+            <div class="flex flex-col">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="input-text" class="text-sm font-medium text-slate-300">1. Pega aquí tu texto original o generado por IA:</label>
+                    <span id="word-count" class="text-xs text-slate-400">0 palabras</span>
+                </div>
+                <textarea id="input-text" rows="12" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 resize-none" placeholder="Ejemplo: El hábitat natural de esta especie se caracteriza por presentar condiciones ambientales extremas... (Alongi, 2020)..."></textarea>
+                
+                <div class="mt-3 flex gap-2">
+                    <button onclick="generatePrompt()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20">
+                        <i class="fas fa-magic"></i> Generar Prompt Blindado
+                    </button>
+                    <button onclick="clearAll()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 py-3 px-4 rounded-xl border border-slate-700 transition" title="Limpiar todo">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Salida -->
+            <div class="flex flex-col">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="output-prompt" class="text-sm font-medium text-emerald-400">2. Prompt listo para pegar en ChatGPT / Gemini:</label>
+                    <span id="citations-detected" class="text-xs text-amber-400 font-medium"></span>
+                </div>
+                <textarea id="output-prompt" rows="12" readonly class="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-sm text-emerald-100/90 focus:outline-none resize-none font-mono" placeholder="Aquí aparecerá la instrucción maestra con tu texto integrado, lista para copiar..."></textarea>
+                
+                <button onclick="copyPrompt()" id="copy-btn" class="mt-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-semibold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fas fa-copy"></i> Copiar Prompt al Portapapeles
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('input-text');
+        const wordCount = document.getElementById('word-count');
+        const citationsDetected = document.getElementById('citations-detected');
+        const outputPrompt = document.getElementById('output-prompt');
+
+        // Contador de palabras y detector de citas en tiempo real
+        inputText.addEventListener('input', () => {
+            const text = inputText.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            wordCount.textContent = `${words} palabras`;
+
+            // Detectar patrones tipo (Autor, Año) o (Autor et al., Año)
+            const citationRegex = /\([A-Za-zÁÉÍÓÚáéíóúñÑ\s&.,]+,\s*\d{4}[a-z]?\)/g;
+            const matches = text.match(citationRegex);
+            if (matches && matches.length > 0) {
+                citationsDetected.textContent = `Citas protegidas: ${matches.join(' | ')}`;
+            } else {
+                citationsDetected.textContent = '';
+            }
+        });
+
+        function generatePrompt() {
+            const text = inputText.value.trim();
+            if (!text) {
+                alert("Por favor, pega primero el texto que deseas humanizar.");
+                return;
+            }
+
+            const words = text.split(/\s+/).length;
+            const citationRegex = /\([A-Za-zÁÉÍÓÚáéíóúñÑ\s&.,]+,\s*\d{4}[a-z]?\)/g;
+            const matches = text.match(citationRegex) || [];
+
+            let prompt = `Actúa como un estudiante universitario real redactor de trabajos académicos. Reescribe el siguiente texto para que suene completamente natural y escrito por un humano, eliminando cualquier rastro o patrón estadístico de Inteligencia Artificial.\n\nREGLAS ESTRICTAS QUE DEBES CUMPLIR:\n`;
+
+            if (document.getElementById('rule-citations').checked) {
+                prompt += `1. PROTECCIÓN ABSOLUTA DE CITAS: No alteres, traduzcas, elimines ni cambies de lugar ninguna cita bibliográfica entre paréntesis. `;
+                if (matches.length > 0) {
+                    prompt += `Específicamente, mantén exactamente iguales: ${matches.join(', ')}.\n`;
+                } else {
+                    prompt += `Mantén intacto cualquier formato (Autor, Año).\n`;
+                }
+            }
+
+            if (document.getElementById('rule-length').checked) {
+                prompt += `2. LONGITUD Y DENSIDAD: NO resumas el texto. Debes conservar toda la información técnica, los datos numéricos y mantener una extensión mínima de ${Math.floor(words * 0.95)} a ${Math.ceil(words * 1.05)} palabras (el original tiene ${words} palabras).\n`;
+            }
+
+            if (document.getElementById('rule-wiki').checked) {
+                prompt += `3. FILTRO ANTI-CLICHÉS DE IA (CRITERIO WIKIPEDIA): Está estrictamente prohibido usar frases grandilocuentes, análisis superficiales al final de los párrafos o muletillas típicas de chatbots como: "en el panorama actual", "juega un papel crucial/fundamental", "es un testimonio de", "marcando un hito", "a pesar de estos desafíos", "en conclusión", "cabe destacar", "subrayando su importancia" o gerundios conclusivos vacíos.\n`;
+            }
+
+            if (document.getElementById('rule-sentences').checked) {
+                prompt += `4. RITMO DE REDACCIÓN HUMANA: Alterna oraciones directas y cortas con explicaciones medias. Evita encadenar demasiadas cláusulas subordinadas complejas o sonar excesivamente poético.\n`;
+            }
+
+            if (document.getElementById('rule-commas').checked) {
+                prompt += `5. CONECTORES NATURALES: Evita el exceso de conectores formales seguidos de coma al inicio de cada oración (como "Asimismo,", "Por consiguiente,", "Además,"). Usa transiciones más orgánicas.\n`;
+            }
+
+            if (document.getElementById('rule-typos').checked) {
+                prompt += `6. IMPERFECCIÓN SUTIL: Introduce de forma muy discreta 1 o 2 omisiones leves de tilde en palabras comunes no técnicas (nunca en nombres científicos ni dentro de las citas bibliográficas) para simular redacción humana sin corrector automático.\n`;
+            }
+
+            prompt += `\nEntrega ÚNICAMENTE el texto reescrito, sin saludos, sin introducciones como "Aquí tienes el texto" y sin comentarios finales.\n\nTEXTO A REESCRIBIR:\n"""\n${text}\n"""`;
+
+            outputPrompt.value = prompt;
+        }
+
+        function copyPrompt() {
+            if (!outputPrompt.value) return;
+            outputPrompt.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copy-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado! Pégalo en tu IA';
+            btn.classList.replace('text-emerald-400', 'text-white');
+            btn.classList.replace('bg-slate-800', 'bg-emerald-600');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.replace('text-white', 'text-emerald-400');
+                btn.classList.replace('bg-emerald-600', 'bg-slate-800');
+            }, 2500);
+        }
+
+        function clearAll() {
+            inputText.value = '';
+            outputPrompt.value = '';
+            wordCount.textContent = '0 palabras';
+            citationsDetected.textContent = '';
+        }
+    </script>
+</body>
+</html>
